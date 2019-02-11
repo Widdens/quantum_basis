@@ -39,6 +39,7 @@
 #include <vector>
 #include <boost/filesystem.hpp>
 #include "mkl.h"
+#include "mkl_spblas.h"
 
 #ifdef _OPENMP
   #include <omp.h>
@@ -990,7 +991,7 @@ namespace qbasis {
         friend void swap <> (csr_mat<T>&, csr_mat<T>&);
     public:
         // default constructor
-        csr_mat() : dim(0), nnz(0), val(nullptr), ja(nullptr), ia(nullptr) {}
+        csr_mat() : dim(0), nnz(0), val(nullptr), ja(nullptr), ia(nullptr), handle(nullptr) {}
         
         // copy constructor
         csr_mat(const csr_mat<T> &old);
@@ -1031,6 +1032,7 @@ namespace qbasis {
         T *val;
         MKL_INT *ja;
         MKL_INT *ia;
+        sparse_matrix_t *handle;
     };
     
     
